@@ -1,0 +1,4 @@
+[ 2024-11-10 13:59:43,393 ] comtypes.client._code_cache - INFO - Imported existing <module 'comtypes.gen' from 'C:\\Users\\pradu\\OneDrive\\Desktop\\Jarvis System\\dist\\main\\_internal\\comtypes\\gen\\__init__.pyc'>
+[ 2024-11-10 13:59:43,393 ] comtypes.client._code_cache - INFO - Creating writeable comtypes cache directory: 'C:\Users\pradu\AppData\Local\Temp\comtypes_cache\main-38'
+[ 2024-11-10 13:59:43,404 ] comtypes.client._code_cache - INFO - Using writeable comtypes cache directory: 'C:\Users\pradu\AppData\Local\Temp\comtypes_cache\main-38'
+[ 2024-11-10 14:00:04,929 ] root - INFO - 
