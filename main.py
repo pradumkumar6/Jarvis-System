@@ -6,8 +6,7 @@ import datetime
 import webbrowser
 import wikipedia
 
-
-# Logging configuration
+# This is Logger for the application
 LOG_DIR = "logs"
 LOG_FILE_NAME = "application.log"
 
@@ -21,19 +20,15 @@ logging.basicConfig(
     level= logging.INFO
 )
 
-# Taking the male voice from the system
+
+
+#Taking the male voice from my system
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty("voices")
-
-
-# for i in voices:
-#     print(i.id)
-
-engine.setProperty("voice", voices[0].id)
-
+engine.setProperty('voice', voices[0].id)
 
 def speak(text):
-    """This function converts text to speech
+    """This function converts text to a voice
 
     Args:
         text
@@ -42,79 +37,83 @@ def speak(text):
     """
     engine.say(text)
     engine.runAndWait()
-# speak("Hello sir, I am Jarvis")
 
 
 def takeCommand():
-    """This function takes command and recognizes it
+    """This function takes command & recognize
 
     Returns:
         text as query
     """
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print("Listening....")
-        r.pause_threshold=1
+        print("Listening...")
+        r.pause_threshold = 1
         audio = r.listen(source)
 
     try:
-        print("Recognizing....")
-        query = r.recognize_google_cloud(audio, language="en-in")
-        print(f"User said:{query}\n")
+        print("Recognizing...")
+        query = r.recognize_google(audio,language="en-in")
+        print(f"User said: {query}\n")
     except Exception as e:
         logging.info(e)
-        speak("Say that again please...")
+        print("Say that again please")
         return "None"
     return query
 
 
-
-# This function will wish
+#this function will wish you
 def wish_me():
     hour = (datetime.datetime.now().hour)
-    if hour >= 0 and hour < 12:
-        speak("Good Morning Sir! How are you doing?")
-    elif hour >= 12 and hour <= 18:
-        speak("Good Afternoon Sir! How are you doing?")
+    
+    if hour >=0 and hour <=12:
+        speak("Good Morning sir! How are you doing?")
+    
+    elif hour >=12 and hour <=18:
+        speak("Good afternoon sir! How are you doing?")
+    
     else:
-        speak("Good Evening Sir! How are you doing?")
-
-    speak("I am Jarvis. How can I help you?")
-
-# wish_me()    
+        speak("Good evening sir! How are you doing?")
+    
+    speak("I am JARVIS.Tell me sir how can i help you?")
 
 
 
-
-# text = takeCommand()
-# print(text)
-# speak(text)
 
 wish_me()
-
 while True:
-    # wish_me()
+
     query = takeCommand().lower()
-    # print(query)
-    # speak(query)
+    print(query)
+    
     if "time" in query:
         strTime = datetime.datetime.now().strftime("%H:%M:%S")
-        speak(f"Sir, the time is {strTime}")
+        speak(f"Sir the time is {strTime}")
+
+    
     elif "name" in query:
-        speak("My name is Jarvis")
+        speak("My name is JARVIS")
+
+    
     elif "exit" in query:
-        speak("Good Bye Sir!")
+        speak("Good bye sir")
         exit()
+
     elif "open google" in query:
-        speak("ok sir. please type here what do you want to search")
+        speak("ok sir. please type here what do you want to read")
         webbrowser.open("google.com")
 
-    # for search something in wikipedia
-    elif "wikipedia" in query:
-        speak("Searching wikipedia...")
+    
+    elif "open facebook" in query:
+        speak("ok sir. opening facebook")
+        webbrowser.open("facebook.com")
+
+    
+    #This query for search something from wikipedia
+    elif 'wikipedia' in query:
+        speak("Searching wikipedia")
         query = query.replace("wikipedia", "")
         results = wikipedia.summary(query, sentences=2)
-        speak("According to wikipedia")
+        speak("According to wikipedia ")
         print(results)
         speak(results)
-
